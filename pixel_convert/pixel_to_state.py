@@ -97,7 +97,7 @@ for keys, vals in abstr_to_pixel.items():
 def convert_to_pixels(keys):    
    return (keys, midpoint[keys])
 
-#print(convert_to_pixels(66))
+print(convert_to_pixels(66))
 
 
 
