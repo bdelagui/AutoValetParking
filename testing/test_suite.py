@@ -91,7 +91,7 @@ class TestSuite(BoxComponent):
                 car = response[0]
                 print('Response received')
                 self.get_next_env_action(response)
-                await self.add_obs((100, 150, 0, 5))
+                await self.add_obs((70, 150, 0, 5))
                 await trio.sleep(5)
                 await self.request_car(car) # requesting car for test
 

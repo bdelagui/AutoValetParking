@@ -1,0 +1,5 @@
+FRAME1
+FRAME2
+42.0 16.5 0 Idle 1
+FRAME3
+42.0 16.5 0 Idle 1

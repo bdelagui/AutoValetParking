@@ -24,7 +24,8 @@ class Obstacles(BoxComponent):
     def create_obstacle_map(self): # static obstacles initialized at the beginning of the simulation
         self.obs = {1: (170, 100, 0, 3), 
         2: (180, 100, 0, 3), 
-        3: (190, 100, 0, 3)}
+        3: (190, 100, 0, 3),
+        4: (200, 100, 0, 3)}
         self.num_obs = len(self.obs)
         self.max_serial_number = self.max_serial_number + self.num_obs
         print('Obstacle Map created')
