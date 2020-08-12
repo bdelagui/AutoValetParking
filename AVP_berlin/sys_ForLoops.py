@@ -41,14 +41,14 @@ for status, status_val in status_car:
       
         #print(carA_val, status)
         start_node= phi(carA_key, status)  
-        print('\n','carA_key,status: ',carA_key ,',',status)
-        print('start_node= ',start_node)
+        #print('\n','carA_key,status: ',carA_key ,',',status)
+        #print('start_node= ',start_node)
           
         for end_carA_transitions in carA_val:
            #print(end_carA_transitions)
             end_node = psi(end_carA_transitions, status)
-            print('end_carA_transitions, status: ', end_carA_transitions,status)
-            print('end_node= ', end_node)              
+            #print('end_carA_transitions, status: ', end_carA_transitions,status)
+            #print('end_node= ', end_node)
             system_trans_list.append((start_node, end_node))
 
       
