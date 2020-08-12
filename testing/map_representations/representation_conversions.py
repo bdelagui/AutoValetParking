@@ -2,7 +2,7 @@
 # Function mapping T&E abstraction of physical objects in the AVP to pixel map:
 # Ex: Input: state = 1, object = "car" or "pedestrian" or "obstacle", Output: pixel_square = [[x_low, x_up], [y_low, y_up]], and midpoint = ((x_low+x_up)/2, (y_low+y_up)/2)
 # For static_obstacles, if object is not present on the grid, state = 0, else state = 1. If state == 0, the pixel square returned would be empty
-def abstr_to_pixels(state, object_type):
+def abstr_to_pixel(state, object_type):
     pass
 
 
