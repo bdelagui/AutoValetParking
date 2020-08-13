@@ -20,8 +20,6 @@ import math
 import networkx as nx
 import pdb
 
-import gridworld_class 
-import Player_class
 
 class GeneralGameGraph:
     def __init__(self, static_obstacles, sys_transitions, env_transitions, unsafe):

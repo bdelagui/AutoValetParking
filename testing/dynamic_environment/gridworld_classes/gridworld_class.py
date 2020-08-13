@@ -36,8 +36,8 @@ import math
 import networkx as nx
 import pdb
 
-import Player_class as pc
-import Game_graph_class as gg
+from . import Player_class as pc
+from . import Game_graph_class as gg
 
 class GridWorld:
     def __init__(self, size):

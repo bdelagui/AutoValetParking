@@ -19,10 +19,6 @@ import math
 import networkx as nx
 import pdb
 
-import Player_class as pc
-import Game_graph_class as gg
-import gridworld_class as gwc
-
 class test_run_configuration:
     def __init__(self, gridworld_obj):
         self.GW = gridworld_obj
