@@ -23,7 +23,7 @@ from map_representations.environment_product import env_to_product, env_from_pro
 
 # Filename to save location and radius of static_obstacle:
 file_path = "static_obstacle_test_data/"
-fname_static_obs = file_path + "static_obstacle_matrix_#.dat"
+fname_static_obs = file_path + "static_obstacle_#.dat"
 fname_static_obs = fname_static_obs.replace("#", strftime("%Y_%m_%d_%H_%M_%S", gmtime()))
 fname_props = file_path + "propositions_#.dat"
 fname_props = fname_props.replace("#", strftime("%Y_%m_%d_%H_%M_%S", gmtime()))
@@ -43,13 +43,19 @@ Tsys_pos_dict = dict(Tsys_components["pos"])
 # Set sys reach goal:
 park_spots = get_parking_spots() # Getting system parking spots in terms of system position nodes
 sys_reach_goal = [park_spots[0]] # Suppose we're interested in the first parking spot
-pickle.dump(sys_reach_goal, pkl_goal)
+pix_square, midpoint = abstr_to_pixel(sys_reach_goal[0], "car")
+goal_rad = get_pixel_radius(pix_square)
+sys_reach_goal_pixel = [tuple(midpoint), goal_rad]
+pickle.dump(sys_reach_goal_pixel, pkl_goal)
 pkl_goal.close()
 
 # Set propositions:
 propositions = [[23]]
 Nprop = len(propositions)
-pickle.dump(propositions, pkl_prop)
+pix_square, midpoint = abstr_to_pixel(propositions[0][0], "car")
+pixel_rad = get_pixel_radius(pix_square)
+propositions_pixel = [tuple(midpoint), pixel_rad]
+pickle.dump(propositions_pixel, pkl_prop)
 pkl_prop.close()
 
 # Collect static obstacles for propositions:
