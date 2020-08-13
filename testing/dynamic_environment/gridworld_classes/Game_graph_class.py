@@ -25,8 +25,8 @@ import math
 import networkx as nx
 import pdb
 
-import gridworld_class 
-import Player_class
+from . import gridworld_class 
+from . import Player_class
 
 class GameGraph:
     def __init__(self, Nrows, Ncols, static_obstacles, cell2node, node2cell, players):

@@ -18,8 +18,8 @@ import math
 import networkx as nx
 import pdb
 
-import gridworld_class as gc
-import Game_graph_class as gg
+from . import gridworld_class as gc
+from . import Game_graph_class as gg
 
 class Player:
     def __init__(self, name, grid, player_transitions_type, ptype):
