@@ -70,4 +70,6 @@ car_pos_transitions_list = [(1,[1,2]),
 
 car_status_transitions_list = [(1,[4]),(2,[2,3]),(3,[2]),(4,[3,4])]
 
-# Product transition function:
+# List of parking spots:
+parking_spots = [48,49,50,51,52,53]
+

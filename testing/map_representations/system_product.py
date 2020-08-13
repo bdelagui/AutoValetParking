@@ -2,6 +2,17 @@
 from TE_vars import global_vars
 from .system_component_transitions import *
 
+# Returns the transition dictionaries for individual system components
+def get_sys_comp_trans():
+    car_components = dict()
+    car_components["pos"] = car_pos_transitions_list
+    car_components["status"] = car_status_transitions_list
+    return car_components
+
+# Return parking spots in terms of system position values
+def get_parking_spots():
+    return parking_spots
+
 # Returns product transitions both as a list and a dictionary
 def construct_sys_product_transition():
     product_trans_list = []

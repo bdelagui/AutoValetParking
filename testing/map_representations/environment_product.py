@@ -2,6 +2,13 @@
 from TE_vars import global_vars
 from .environment_component_transitions import *
 
+# Returns the transition dictionaries for individual system components
+def get_env_comp_trans():
+    env_components = dict()
+    env_components["ped"] = pedestrian_transitions_list
+    env_components["sup"] = sup_status_transitions_list
+    return env_components
+
 # Returns product transitions both as a list and a dictionary
 def construct_env_product_transition():
     product_trans_list = []
