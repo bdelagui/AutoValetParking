@@ -13,6 +13,12 @@ from prepare.communication import get_current_time
 import trio
 import random
 from ipdb import set_trace as st
+<<<<<<< HEAD
+=======
+import numpy as np
+import sys
+import pickle
+>>>>>>> 54a0098b69bdcc8f14c720732d4585c81206d0d3
 # import components
 from prepare.boxcomponent import BoxComponent
 from components.car import Car
@@ -61,11 +67,35 @@ class TestSuite(BoxComponent):
         print('{0} / ID {1} Failing'.format(car.name, car.id))
         await self.failure(Game)
 
+<<<<<<< HEAD
     async def start_ped(self,TestPed):
         # spawn the ped in loc A and save to ped list
         print('Spawning ped')
 
     async def stop_ped(self,TestPed):
+=======
+    async def start_ped(self, start_at, stop_at, ped_type):
+        # spawn the ped in loc A and save to pedestrian list
+        #print(ped_type)
+        if not ped_type:
+            ped_type=random.choice(['1','2','3','4','5','6'])
+        dx = stop_at[0]-start_at[0]
+        dy = stop_at[0]-start_at[0]
+        heading = np.arctan2(-dy,dx)
+        #print(ped_type)
+        #st()
+        ped = TestPed(init_state =(start_at[0],start_at[1],heading,0),pedestrian_type=ped_type)
+        if dx >=0:
+            ped.status = 'WalkE'
+        else:
+            ped.status = 'WalkW'
+        self.nursery.start_soon(ped.run,start_at,stop_at)
+        await self.out_channels['GameEnterPeds'].send(ped)
+        self.peds.append(ped)
+        print('TEST SUPERVISOR - Adding pedestrian to lower crosswalk')
+
+    async def stop_ped(self):
+>>>>>>> 54a0098b69bdcc8f14c720732d4585c81206d0d3
         print('Stop ped')
 
     async def ped_walk_west(self,TestPed):
@@ -96,7 +126,50 @@ class TestSuite(BoxComponent):
                 await self.request_car(car) # requesting car for test
 
     async def update_system_state(self):
+<<<<<<< HEAD
         print('Updating the system state')
+=======
+        # print('Updating the system state')
+        ped_started = False
+        ped_stopped = False
+        obs_added = False
+        ped_walking_east = False
+        ped_walking_west = False
+        while self.garage_open:
+            # These are just example actions
+            # Here call the test script with the system state and env state
+            # and call actions accordingly
+            # Read system state
+            car = self.cars[0]
+            sys_state = [car.x, car.y]
+            # generate env action here
+            # self.get_next_env_action(sys_state)
+            # example pedestrian actions
+            if car.y > 20 and not ped_started: # generate pedestrian for the first time and walk towards east
+                ped_started = True
+                ped_walking_east = True
+                ped_walking_west = False
+                stop_at = (2700,2090)
+                start_at = (1730,2090)
+                await self.start_ped(start_at,stop_at,'3')
+            if car.status == 'Completed' and not ped_stopped: # stop pedestrian when car is parked
+                ped_stopped = True
+                ped_walking_east = False
+                ped_walking_west = False
+                await self.stop_ped()
+            if car.x < 15 and not car.status =='Completed' and ped_stopped: # turn around to walk west
+                ped_stopped = False
+                ped_walking_east = False
+                ped_walking_west = True
+                stop_at = (1730,2090)
+                start_at = (2700,2090)
+                await self.ped_walk(start_at,stop_at)
+            # example obstacle action
+            if car.status == 'Completed' and not obs_added:
+                obs_added = True
+                #await self.add_obs((100, 150, 0, 5))
+            await trio.sleep(0)
+>>>>>>> 54a0098b69bdcc8f14c720732d4585c81206d0d3
 
     async def run_test(self,Planner,Game):
         print('Testing')
@@ -105,7 +178,20 @@ class TestSuite(BoxComponent):
     async def run(self,Planner,Game): #TestPed, TestSupervisor, TestObstacles
         print('TEST SUITE - started')
         now = trio.current_time()
+<<<<<<< HEAD
         park_time = 300 #
+=======
+        park_time = 300
+        self.sup_2_ped, self.ped_2_sup = trio.open_memory_channel(25)
+        # read in the testing data
+        # sys.path.append('../static_obstacle_test_data')
+        with open('propositions.dat', 'rb') as f:
+            self.propositions = pickle.load(f)
+        with open('reachgoal.dat', 'rb') as f:
+            self.reachgoal = pickle.load(f)
+        # find which spot to park at from reachgoal test parking_data
+
+>>>>>>> 54a0098b69bdcc8f14c720732d4585c81206d0d3
         await self.generate_car(now, park_time)
         async with trio.open_nursery() as nursery:
             nursery.start_soon(self.run_test,Planner,Game)

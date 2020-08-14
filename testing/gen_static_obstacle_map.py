@@ -11,19 +11,41 @@ import math
 import networkx as nx
 import pdb
 from time import gmtime, strftime
-pdb.set_trace()
+import sys 
+#pdb.set_trace()
 
 #from dynamic_environment.gridworld_classes.gridworld_class import GridWorld 
 #from dynamic_environment.gridworld_classes.Player_class import Player
 #from dynamic_environment.transitions_classes.General_Game_Graph_class import GeneralGameGraph
-from static_environment.transitions.test_run_configuration_transitions import test_run_configuration as trc
-from coverage_propositions.lamda_functions import construct_lambda_functions
-from map_representations.representation_conversions import abstr_to_pixel, pixel_to_abstr, get_pixel_radius
-from map_representations.system_product import sys_to_product, sys_from_product, construct_sys_product_transition, get_sys_comp_trans, get_parking_spots
-from map_representations.environment_product import env_to_product, env_from_product, construct_env_product_transition
-#import files above manually by appending path
 
-pdb.set_trace()
+sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/static_environment/transitions')
+from test_run_configuration_transitions import test_run_configuration as trc
+
+sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/coverage_propositions')
+from lamda_functions import construct_lambda_functions
+
+sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations')
+from representation_conversions import abstr_to_pixel
+from representation_conversions import pixel_to_abstr
+#from representation_conversions import get_pixel_radius
+
+sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations')
+from system_product import sys_to_product, sys_from_product, construct_sys_product_transition, get_sys_comp_trans, get_parking_spots
+
+sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations/environment_product')
+import env_to_product, env_from_product, construct_env_product_transition
+
+
+
+ 
+
+#from static_environment.transitions.test_run_configuration_transitions import test_run_configuration as trc
+#from coverage_propositions.lamda_functions import construct_lambda_functions
+#from map_representations.representation_conversions import abstr_to_pixel, pixel_to_abstr, get_pixel_radius
+#from map_representations.system_product import sys_to_product, sys_from_product, construct_sys_product_transition, get_sys_comp_trans, get_parking_spots
+#from map_representations.environment_product import env_to_product, env_from_product, construct_env_product_transition
+
+#pdb.set_trace()
 
 # Filename to save location and radius of static_obstacle:
 file_path = "static_obstacle_test_data/"

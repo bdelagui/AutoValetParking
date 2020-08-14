@@ -1,6 +1,8 @@
 # File that converts individual states of system components to the product state and vice-versa
 from TE_vars import global_vars
-from . import system_component_transitions 
+import sys
+sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations')
+import system_component_transitions
 
 # Returns the transition dictionaries for individual system components
 def get_sys_comp_trans():
