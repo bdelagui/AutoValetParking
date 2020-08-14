@@ -23,11 +23,9 @@ class Obstacles(BoxComponent):
         self.max_serial_number = 0
 
     def create_obstacle_map(self): # static obstacles initialized at the beginning of the simulation
-<<<<<<< HEAD
         self.obs = {1: (170, 100, 0, 3),
         2: (180, 100, 0, 3), 
         3: (190, 100, 0, 3)}
-=======
         # self.obs = {1: (170, 100, 0, 3), # example test data
         # 2: (180, 100, 0, 3),
         # 3: (190, 100, 0, 3)}
@@ -39,7 +37,6 @@ class Obstacles(BoxComponent):
         self.obs = dict(enumerate(obs))
         self.obs.pop(0) # delete big obstacle for test
         #self.obs.pop(1) #  delete obstacle in red area
->>>>>>> 54a0098b69bdcc8f14c720732d4585c81206d0d3
         self.num_obs = len(self.obs)
         self.max_serial_number = self.max_serial_number + self.num_obs
         print('Obstacle Map created')

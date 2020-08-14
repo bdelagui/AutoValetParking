@@ -1,6 +1,9 @@
 # File consisting of functions that map from the product state to the individual states of the components
 from TE_vars import global_vars
-from .environment_component_transitions import *
+import sys
+#from . environment_component_transitions import *
+sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations')
+from environment_component_transitions import *
 
 # Returns the transition dictionaries for individual system components
 def get_env_comp_trans():

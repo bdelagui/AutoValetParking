@@ -32,8 +32,8 @@ from representation_conversions import pixel_to_abstr
 sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations')
 from system_product import sys_to_product, sys_from_product, construct_sys_product_transition, get_sys_comp_trans, get_parking_spots
 
-sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations/environment_product')
-import env_to_product, env_from_product, construct_env_product_transition
+sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations')
+from environment_product import env_to_product, env_from_product, construct_env_product_transition
 
 
 
