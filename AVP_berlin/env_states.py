@@ -28,11 +28,12 @@ sup_transitions =[(1, [4]), (2, [1,4]), (3, [1,4]),(4,[2,3])]
 
 #For peds: physical state 54= state1, 55=2, 39=3, 32=4, 56=5
 # adjust list for ped to walk left as well 
-list_peds = [(1,[1,2,5]),
-              (2,[1,2,3]),
-              (3,[2,3,4]),
-              (4,[3.4,5]),
-              (5,[4,5,1])]
+list_peds = [(1,[1,2,6]),
+             (2,[1,2,3]),
+             (3,[2,3,4]),
+             (4,[3,4,5]),
+             (5,[4,5,6]),
+             (6,[5,6,1])]
 
 
 list_peds_dict = dict(list_peds)

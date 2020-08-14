@@ -11,15 +11,19 @@ import math
 import networkx as nx
 import pdb
 from time import gmtime, strftime
+pdb.set_trace()
 
-from dynamic_environment.gridworld_classes.gridworld_class import GridWorld 
-from dynamic_environment.gridworld_classes.Player_class import Player
-from dynamic_environment.transitions_classes.General_Game_Graph_class import GeneralGameGraph
+#from dynamic_environment.gridworld_classes.gridworld_class import GridWorld 
+#from dynamic_environment.gridworld_classes.Player_class import Player
+#from dynamic_environment.transitions_classes.General_Game_Graph_class import GeneralGameGraph
 from static_environment.transitions.test_run_configuration_transitions import test_run_configuration as trc
 from coverage_propositions.lamda_functions import construct_lambda_functions
 from map_representations.representation_conversions import abstr_to_pixel, pixel_to_abstr, get_pixel_radius
 from map_representations.system_product import sys_to_product, sys_from_product, construct_sys_product_transition, get_sys_comp_trans, get_parking_spots
 from map_representations.environment_product import env_to_product, env_from_product, construct_env_product_transition
+#import files above manually by appending path
+
+pdb.set_trace()
 
 # Filename to save location and radius of static_obstacle:
 file_path = "static_obstacle_test_data/"
@@ -42,7 +46,7 @@ Tsys_pos_dict = dict(Tsys_components["pos"])
 
 # Set sys reach goal:
 park_spots = get_parking_spots() # Getting system parking spots in terms of system position nodes
-sys_reach_goal = [park_spots[0]] # Suppose we're interested in the first parking spot
+sys_reach_goal = [park_spots[0]] # Suppose we're interested in the first parking spot 
 pix_square, midpoint = abstr_to_pixel(sys_reach_goal[0], "car")
 goal_rad = get_pixel_radius(pix_square)
 sys_reach_goal_pixel = [tuple(midpoint), goal_rad]
@@ -50,7 +54,7 @@ pickle.dump(sys_reach_goal_pixel, pkl_goal)
 pkl_goal.close()
 
 # Set propositions:
-propositions = [[23]]
+propositions = [[23]] 
 Nprop = len(propositions)
 pix_square, midpoint = abstr_to_pixel(propositions[0][0], "car")
 pixel_rad = get_pixel_radius(pix_square)
@@ -62,7 +66,7 @@ pkl_prop.close()
 test_config = trc(Tsys_pos_dict)
 test_config.set_final_reach_goal(sys_reach_goal)
 test_config.set_propositions(propositions)
-via = "ValueFunc"
+via = "ValueFunc" 
 if via == "ValueFunc":
         cut_transitions, static_obstacles = test_config.generate_static_obstacles(propositions, sys_reach_goal)
 if via == "Labels":

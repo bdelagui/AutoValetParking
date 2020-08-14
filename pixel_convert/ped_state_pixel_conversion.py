@@ -7,11 +7,12 @@ Created on Wed Aug 12 20:39:16 2020
 """
 
 
-abstr_to_pixel = {1:((145,155),(175,180)),
-                2:((160,170),(175,180)),
-                3:((175,185),(175,180)),
-                4:((190,200),(175,180)),
-                5:((205,215),(175,180))}
+abstr_to_pixel = {1:((145,160),(175,190)),
+                2:((160,175),(175,190)),
+                3:((175,190),(175,190)),
+                4:((190,210),(175,190)),
+                5:((210,225),(175,190))} 
+                6:((225,240),(175,190))} 
 
 # pixels to abstract 
 pixels_to_abstr = {v: k for k, v in abstr_to_pixel.items()}
@@ -42,6 +43,6 @@ for pixel_keys, state_vals in pixels_to_abstr.items():
 def convert_to_abstr(pixel_keys):
     return(pixel_range[pixel_keys])
     
-print(convert_to_abstr(((205,215),(175,180))))
+print(convert_to_abstr(((225,240),(175,190))))
 
     
