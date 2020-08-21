@@ -1,10 +1,10 @@
 # File that converts individual states of system components to the product state and vice-versa
 from TE_vars import global_vars
 #from . import system_component_transitions
-
-import sys
-sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations')
-import system_component_transitions
+from system_component_transitions import *
+#import sys
+#sys.path.append('/Users/berlindelaguila/AutoValetParking/testing/testing/map_representations')
+#import system_component_transitions
 
 # Returns the transition dictionaries for individual system components
 def get_sys_comp_trans():
@@ -16,13 +16,14 @@ def get_sys_comp_trans():
 # Return parking spots in terms of system position values
 def get_parking_spots():
     return parking_spots
-
+ 
 # Returns product transitions both as a list and a dictionary
 def construct_sys_product_transition():
     product_trans_list = []
     product_trans_dict = dict()
-    car_status = dict(car_status_transitions_list)
     car_pos_transitions = dict(car_pos_transitions_list)
+    car_status = dict(car_status_transitions_list)
+
     Nstat = len(car_status_transitions_list)
     phi = lambda pos, status: Nstat * (pos - 1) + status
     for skey, sval in car_status.items():

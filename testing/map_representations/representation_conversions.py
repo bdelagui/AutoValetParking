@@ -164,4 +164,4 @@ def get_pixel_radius(pixel_square):
     xlen = pixel_square[0][1]-pixel_square[0][0]
     ylen = pixel_square[1][1]-pixel_square[1][0]
     rad = min(xlen, ylen)
-    return rad
+    return rad/6 #divide by two bc it was originally computing diameter 
