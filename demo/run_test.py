@@ -66,6 +66,7 @@ async def main():
         nursery.start_soon(supervisor.run, planner, time_sys, simulation,logger)
         #nursery.start_soon(customer.run,END_TIME,START_TIME, game)
         nursery.start_soon(obstacles.run, game, simulation,planner)
+        
         nursery.start_soon(test_suite.run,planner,game)
 
 trio.run(main)

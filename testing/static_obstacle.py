@@ -26,7 +26,7 @@ class Obstacles(BoxComponent):
         self.obs = dict()
         self.num_obs = len(self.obs) # number of obstacles currently in the lot
         self.max_serial_number = 0
-        self.only_accept_obs = False
+        self.only_accept_obs = True
 
     def create_obstacle_map(self): # static obstacles initialized at the beginning of the simulation
         self.obs = {1: (200, 100, 0, 3),
@@ -37,7 +37,7 @@ class Obstacles(BoxComponent):
         5: (182.5, 180, 0 ,3),
         6: (210, 120, 0, 3),
         7: (210, 130, 0, 3),
-        8: (170, 100, 0, 3),
+        8: (160, 100, 0, 3),
         9: (192, 180, 0, 3)} # state 62
         #   self.obs = {1: (170, 100, 0, 3), # example test data
         # 2: (180, 100, 0, 3),
@@ -59,6 +59,22 @@ class Obstacles(BoxComponent):
 #           for key in delkeys:
 #               self.obs.pop(key)
                 
+        #with open(sys.path[0]+'/../testing/static_obstacle_test_data/static_obstacle.dat', 'rb') as f:
+        with open('../testing/static_obstacle_test_data/static_obstacle.dat', 'rb') as f:
+            obs_map = pickle.load(f)
+        obs = [(item[0][0], item[0][1], 0, item[1]) for item in obs_map]
+        self.obs = dict(enumerate(obs))
+        self.obs.pop(0) # delete big obstacle for test
+        #self.obs.pop(1) #  delete obstacle in red area
+        # delete all obstacles in unacceptable area
+        if self.only_accept_obs:
+            delkeys = []
+            for key,val in self.obs.items():
+                loc = Point([(val[0]*SFP,val[1]*SFP)]).buffer(val[3]*SFP)
+                if not loc.intersects(FAILURE_ACCEPT_BOX_1):
+                    delkeys.append(key)
+            for key in delkeys:
+                self.obs.pop(key)
         self.num_obs = len(self.obs)
         self.max_serial_number = self.max_serial_number + self.num_obs
         print('Obstacle Map created')

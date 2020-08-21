@@ -11,6 +11,7 @@ from variables.parking_data import test_spots as parking_spots
 from prepare.communication import get_current_time
 # import packages
 import trio
+import pickle
 import random
 from ipdb import set_trace as st
 # import components
@@ -32,6 +33,9 @@ class TestSuite(BoxComponent):
         self.Logger = None
     #pdb.set_trace()
     async def generate_car(self, start_time, park_time):
+        self.garage_open = True
+
+    async def generate_car(self, start_time, park_time, parking_spot_number):
         print('TEST SUITE - Generating car')
         arrive_time = get_current_time(start_time)
         depart_time = arrive_time + park_time
@@ -44,7 +48,7 @@ class TestSuite(BoxComponent):
         # update Game
         await self.out_channels['Game'].send(car)
         print("Car with Name {0} and ID {1} arrives at {2:.3f}".format(car.name,car.id, car.arrive_time))
-        await self.out_channels['Planner'].send([car, ('Park', self.spot_no)])
+        await self.out_channels['Planner'].send([car, ('Park', parking_spot_number)])
         self.cars.append(car)
    # pdb.set_trace()
 
@@ -113,7 +117,21 @@ class TestSuite(BoxComponent):
         print('TEST SUITE - started')
         now = trio.current_time()
         park_time = 300 #
-        await self.generate_car(now, park_time)
+        parking_spot_number = 2 
+        await self.generate_car(now, park_time, parking_spot_number)
+        park_time = 300
+        self.sup_2_ped, self.ped_2_sup = trio.open_memory_channel(25)
+        # read in the testing data
+        # sys.path.append('../static_obstacle_test_data')
+       # with open(sys.path[0]+'/../testing/static_obstacle_test_data/propositions.dat', 'rb') as f:
+        with open('../testing/static_obstacle_test_data/propositions.dat', 'rb') as f:
+           self.propositions = pickle.load(f)
+        #with open(sys.path[0]+'/../testing/static_obstacle_test_data/reachgoal.dat', 'rb') as f:
+        with open('../testing/static_obstacle_test_data/reachgoal.dat', 'rb') as f:
+            self.reachgoal = pickle.load(f)
+        # find which spot to park at from reachgoal test parking_data
+        parking_spot_number = random.sample(self.parking_spots.keys(),1)[0]
+        await self.generate_car(now, park_time, parking_spot_number)
         async with trio.open_nursery() as nursery:
             nursery.start_soon(self.run_test,Planner,Game)
 
